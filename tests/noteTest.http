@@ -1,0 +1,64 @@
+Post http://localhost:3000/api/notes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2RkYTVmY2ViNWI2YzM0MTJjMjQ5NjQiLCJmdWxsbmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJ0ZXN0QGVtYWlsLmNvbSIsImlhdCI6MTY3NTQ3MDYyMH0.cToGkdsnGOIKMUkbh9VS_kGh2Ya2cQIdMSzS4ATpWrc
+
+{
+    "title": "My first note4",
+    "description":"writen on friday",
+    "content": "This is my first note"
+}
+###
+
+Get http://localhost:3000/api/notes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2RkYWUxM2M0ZDExNDliZDRjMDk0NDciLCJmdWxsbmFtZSI6IkFzc2FkIHNhYWQiLCJlbWFpbCI6InNhYWRAbWl1LmVkdSIsImlhdCI6MTY3NTQ3MjQzN30.7Gc7d1rdOp7JNyzHKKyTMgsAq290AcWiLjJBkPJpQhA
+
+
+
+###
+Get http://localhost:3000/api/notes/63ddb6b4c23783c6482b7730
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2RkYWUxM2M0ZDExNDliZDRjMDk0NDciLCJmdWxsbmFtZSI6IkFzc2FkIHNhYWQiLCJlbWFpbCI6InNhYWRAbWl1LmVkdSIsImlhdCI6MTY3NTQ3MjQzN30.7Gc7d1rdOp7JNyzHKKyTMgsAq290AcWiLjJBkPJpQhA
+
+###
+PUT http://localhost:3000/api/notes/63ddb6b4c23783c6482b7730
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2RkYWUxM2M0ZDExNDliZDRjMDk0NDciLCJmdWxsbmFtZSI6IkFzc2FkIHNhYWQiLCJlbWFpbCI6InNhYWRAbWl1LmVkdSIsImlhdCI6MTY3NTQ3MjQzN30.7Gc7d1rdOp7JNyzHKKyTMgsAq290AcWiLjJBkPJpQhA
+Content-Type: application/json
+
+{
+    "title": "My first 3",
+    "description":"writen on thrursday",
+    "content": "This is my second note"
+}
+###
+DELETE http://localhost:3000/api/notes/63ddb6b4c23783c6482b7730
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2RkYWUxM2M0ZDExNDliZDRjMDk0NDciLCJmdWxsbmFtZSI6IkFzc2FkIHNhYWQiLCJlbWFpbCI6InNhYWRAbWl1LmVkdSIsImlhdCI6MTY3NTQ3MjQzN30.7Gc7d1rdOp7JNyzHKKyTMgsAq290AcWiLjJBkPJpQhA
+
+
+
+
+###
+Post http://localhost:3000/api/notes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2RkYWUxM2M0ZDExNDliZDRjMDk0NDciLCJmdWxsbmFtZSI6IkFzc2FkIHNhYWQiLCJlbWFpbCI6InNhYWRAbWl1LmVkdSIsImlhdCI6MTY3NTQ3MjQzN30.7Gc7d1rdOp7JNyzHKKyTMgsAq290AcWiLjJBkPJpQhA
+
+{
+    "title": "Second note",
+    "content": "This is my first note"
+}
+
+###
+Put http://localhost:3000/api/notes/63ddb6a91d42becc176734f7/share
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2RkYWUxM2M0ZDExNDliZDRjMDk0NDciLCJmdWxsbmFtZSI6IkFzc2FkIHNhYWQiLCJlbWFpbCI6InNhYWRAbWl1LmVkdSIsImlhdCI6MTY3NTQ3MjQzN30.7Gc7d1rdOp7JNyzHKKyTMgsAq290AcWiLjJBkPJpQhA
+
+{
+    "email": "ruth@miu.edu"
+}
+
+###
+Get http://localhost:3000/api/notes/shared
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2RkYjg2NmIzMjNiN2I3MDM1MDQxYmIiLCJmdWxsbmFtZSI6IlJ1dGggWWVtYW5lIiwiZW1haWwiOiJydXRoQG1pdS5lZHUiLCJpYXQiOjE2NzU0NzY0ODd9.JHu9mx6SS7X-Im8CAGBPqZsl2pIjnFrDqdCJew1bKBo
+
+
+
+
+

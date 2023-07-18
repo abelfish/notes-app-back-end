@@ -1,0 +1,17 @@
+POST http://localhost:3000/api/notes/images
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2RkYjg2NmIzMjNiN2I3MDM1MDQxYmIiLCJmdWxsbmFtZSI6IlJ1dGggWWVtYW5lIiwiZW1haWwiOiJydXRoQG1pdS5lZHUiLCJpYXQiOjE2NzU0NzY0ODd9.JHu9mx6SS7X-Im8CAGBPqZsl2pIjnFrDqdCJew1bKBo
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image"; filename="test.jpg"
+Content-Type: image/jpeg
+
+< ./test.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+
+GET http://localhost:3000/api/notes/images/image-1675724857310-737091450.jpg HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2RkYjg2NmIzMjNiN2I3MDM1MDQxYmIiLCJmdWxsbmFtZSI6IlJ1dGggWWVtYW5lIiwiZW1haWwiOiJydXRoQG1pdS5lZHUiLCJpYXQiOjE2NzU0NzY0ODd9.JHu9mx6SS7X-Im8CAGBPqZsl2pIjnFrDqdCJew1bKBo
+
