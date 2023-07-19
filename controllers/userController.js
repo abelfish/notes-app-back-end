@@ -3,6 +3,10 @@ const userModel = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 const { SECRET } = require('../config.json');
 const { SUGAR } = require('../config.json');
+const AWS = require('aws-sdk');
+
+
+
 
 module.exports.login = async (req, res, next) => {
   try {
@@ -36,6 +40,10 @@ module.exports.login = async (req, res, next) => {
   }
 };
 module.exports.signup = async (req, res, next) => {
+
+
+
+
   try {
     const newUser = req.body;
     // check if email already exists
@@ -44,15 +52,42 @@ module.exports.signup = async (req, res, next) => {
     if (emailResults) {
       res.status(404).json({ success: false, results: 'Email already exists' });
     } else {
-    console.log(newUser);
-    const hashed_password = await brcypt.hash(newUser.password, 10);
-    const results = await userModel.create({
-      ...newUser,
-      password: hashed_password,
-    });
-    res.json({ success: true, results: results });
+      const hashed_password = await brcypt.hash(newUser.password, 10);
+      const results = await userModel.create({
+        ...newUser,
+        password: hashed_password,
+      });
+
+      // publish email
+      publishEmail(newUser.email);
+
+      res.json({ success: true, results: results });
     }
   } catch (error) {
     next(error);
   }
+
 };
+
+const publishEmail = async (email) => {
+  //configure AWS
+  AWS.config.update({ region: 'us-east-1' });
+  //configure sns
+  const params = {
+    Message: email, /* required */
+    TopicArn: 'arn:aws:sns:us-east-1:419434614930:SignupTopic'
+  };
+
+  // Create promise and SNS service object
+  const publishTextPromise = new AWS.SNS({ apiVersion: '2010-03-31' }).publish(params).promise();
+
+  // Handle promise's fulfilled/rejected states
+  publishTextPromise.then(
+    function (data) {
+      console.log(`Message ${params.Message} sent to the topic ${params.TopicArn}`);
+      console.log("MessageID is " + data.MessageId);
+    }).catch(
+      function (err) {
+        console.error(err, err.stack);
+      });
+}
