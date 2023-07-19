@@ -131,7 +131,10 @@ module.exports.shareNoteByEmail = async (req, res, next) => {
         );
         if (!results) {
           res.status(404).json({ success: false, results: 'Note not found' });
+          return;
         }
+
+        sendSQSMessage(email)
         res.json({ success: true, results });
       }
     }
@@ -205,3 +208,24 @@ module.exports.deleteNoteImageById = async (req, res, next) => {
     next(error);
   }
 };
+
+
+const sendSQSMessage = async (email) => {
+  AWS.config.update({ region: 'us-east-1' });
+
+  // Create an SQS service object
+  var sqs = new AWS.SQS({ apiVersion: '2012-11-05' });
+
+  var params = {
+    MessageBody: email,
+    QueueUrl: "https://sqs.us-east-1.amazonaws.com/419434614930/SignupQueue"
+  };
+
+  sqs.sendMessage(params, function (err, data) {
+    if (err) {
+      console.log("Error", err);
+    } else {
+      console.log("Success", data.MessageId);
+    }
+  });
+}

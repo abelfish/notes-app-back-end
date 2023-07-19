@@ -3,9 +3,6 @@ const userModel = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 const { SECRET } = require('../config.json');
 const { SUGAR } = require('../config.json');
-const AWS = require('aws-sdk');
-
-
 
 
 module.exports.login = async (req, res, next) => {
@@ -41,9 +38,6 @@ module.exports.login = async (req, res, next) => {
 };
 module.exports.signup = async (req, res, next) => {
 
-
-
-
   try {
     const newUser = req.body;
     // check if email already exists
@@ -58,8 +52,7 @@ module.exports.signup = async (req, res, next) => {
         password: hashed_password,
       });
 
-      // publish email
-      publishEmail(newUser.email);
+
 
       res.json({ success: true, results: results });
     }
@@ -68,26 +61,3 @@ module.exports.signup = async (req, res, next) => {
   }
 
 };
-
-const publishEmail = async (email) => {
-  //configure AWS
-  AWS.config.update({ region: 'us-east-1' });
-  //configure sns
-  const params = {
-    Message: email, /* required */
-    TopicArn: 'arn:aws:sns:us-east-1:419434614930:SignupTopic'
-  };
-
-  // Create promise and SNS service object
-  const publishTextPromise = new AWS.SNS({ apiVersion: '2010-03-31' }).publish(params).promise();
-
-  // Handle promise's fulfilled/rejected states
-  publishTextPromise.then(
-    function (data) {
-      console.log(`Message ${params.Message} sent to the topic ${params.TopicArn}`);
-      console.log("MessageID is " + data.MessageId);
-    }).catch(
-      function (err) {
-        console.error(err, err.stack);
-      });
-}
