@@ -2,6 +2,7 @@ const noteModel = require('../models/noteModel');
 const { ImageModel } = require('../models/imageModel');
 const userModel = require('../models/userModel');
 const fs = require('fs');
+const AWS = require('aws-sdk');
 
 module.exports.getAllNotes = async (req, res, next) => {
   try {
