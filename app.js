@@ -9,6 +9,12 @@ const app = express();
 const mongoose = require('mongoose');
 const { DB_SERVER } = require('./config.json');
 const noteRouter = require('./routers/noteRouter');
+const AWS = require('aws-sdk');
+
+// Configure AWS credentials and region
+AWS.config.update({
+  region: 'us-east-1'
+});
 
 // Mongoose
 // connect to database
@@ -22,8 +28,24 @@ mongoose
     console.log(err);
   });
 
-// Logger
-app.use(morgan('dev'));
+// Morgan log to AWS s3 bucket
+const s3 = new AWS.S3();
+const s3Stream = {
+  write: (logData) => {
+    const params = {
+      Bucket: 'application-logs-simple-note-app',
+      Key: 'log-file.log',
+      Body: logData
+    };
+
+    s3.putObject(params, (error) => {
+      if (error) {
+        console.error('Error uploading log to S3:', error);
+      }
+    });
+  }
+};
+app.use(morgan('combined', { stream: s3Stream }));
 // CORS
 app.use(cors());
 
