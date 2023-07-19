@@ -3,6 +3,7 @@ const { ImageModel } = require('../models/imageModel');
 const userModel = require('../models/userModel');
 const fs = require('fs');
 const AWS = require('aws-sdk');
+const { SERVER_URL } = require('../config.json');
 
 module.exports.getAllNotes = async (req, res, next) => {
   try {
@@ -165,7 +166,7 @@ module.exports.uploadImage = async (req, res, next) => {
     console.log(filename);
 
     // send back image url
-    url = `http://localhost:3000/api/notes/images/${filename}`;
+    url = `http://${SERVER_URL}/api/notes/images/${filename}`;
 
     res.send({ link: url });
   } catch (e) {
@@ -219,7 +220,7 @@ const sendSQSMessage = async (email) => {
 
   var params = {
     MessageBody: email,
-    QueueUrl: "https://sqs.us-east-1.amazonaws.com/419434614930/SignupQueue"
+    QueueUrl: "https://sqs.us-east-1.amazonaws.com/419434614930/EmailQueue"
   };
 
   sqs.sendMessage(params, function (err, data) {
