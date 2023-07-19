@@ -2,7 +2,7 @@ const express = require('express');
 
 const userRouter = require('./routers/userRouter');
 const morgan = require('morgan');
-const PORT = 443;
+const PORT = 80;
 const cors = require('cors');
 const { checkToken } = require('./middlewares/checkToken');
 const app = express();
