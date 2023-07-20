@@ -41,9 +41,7 @@ const logger = winston.createLogger({
   ],
 });
 
-morgan('combined', {
-  stream: logger,
-});
+app.use(morgan('combined', { stream: logger }));
 // CORS
 app.use(cors());
 
