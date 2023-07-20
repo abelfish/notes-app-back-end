@@ -32,8 +32,8 @@ mongoose
   });
 
 // Morgan log to AWS cloudwatch using winston
-const logger = log = winston.createLogger({
-  level: 'info',
+const logger = winston.createLogger({
+
   format: format.json(),
   transports: [
     new WinstonCloudWatch({
@@ -44,8 +44,14 @@ const logger = log = winston.createLogger({
     }),
   ]
 });
+const winstonStream = {
+  write: function (message, encoding) {
+    // Use the logger to log the message to CloudWatch
+    logger.info(message.trim());
+  },
+};
 
-app.use(morgan('combined', { stream: logger.stream }));
+app.use(morgan('combined', { stream: winstonStream }));
 // CORS
 app.use(cors());
 
