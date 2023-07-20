@@ -30,24 +30,20 @@ mongoose
   });
 
 // Morgan log to AWS cloudwatch using winston
-const logger = winston.createLogger({
+const logger = log = winston.createLogger({
+  level: 'debug',
+  format: format.json(),
   transports: [
     new WinstonCloudWatch({
-      logGroupName: 'simple-note-app-logs',
-      logStreamName: 'logs-from-server-' + os.hostname(),
+      level: 'info',
+      logGroupName: 'notes-app-logs',
+      logStreamName: 'logs-stream-' + os.hostname(),
       awsRegion: 'us-east-1',
-      jsonMessage: true,
-      retentionInDays: 14,
-      //format logs
-      formatLog: function (item) {
-        return item.level + ': ' + item.message + ' ' + JSON.stringify(item.meta)
-      }
-
     }),
-  ],
+  ]
 });
 
-app.use(morgan('combined', { stream: logger }));
+app.use(morgan('combined', { stream: logger.stream }));
 // CORS
 app.use(cors());
 
