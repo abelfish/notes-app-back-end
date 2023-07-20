@@ -37,6 +37,12 @@ const logger = winston.createLogger({
       logStreamName: 'logs-from-server-' + os.hostname(),
       awsRegion: 'us-east-1',
       jsonMessage: true,
+      retentionInDays: 14,
+      //format logs
+      formatLog: function (item) {
+        return item.level + ': ' + item.message + ' ' + JSON.stringify(item.meta)
+      }
+
     }),
   ],
 });
