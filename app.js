@@ -1,5 +1,5 @@
 const express = require('express');
-
+const winston = require('winston'), WinstonCloudWatch = require('winston-cloudwatch');
 const userRouter = require('./routers/userRouter');
 const morgan = require('morgan');
 const PORT = 80;
@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const { DB_SERVER } = require('./config.json');
 const noteRouter = require('./routers/noteRouter');
 const AWS = require('aws-sdk');
+const os = require('os');
 
 // Configure AWS credentials and region
 AWS.config.update({
@@ -28,24 +29,21 @@ mongoose
     console.log(err);
   });
 
-// Morgan log to AWS s3 bucket
-const s3 = new AWS.S3();
-const s3Stream = {
-  write: (logData) => {
-    const params = {
-      Bucket: 'application-logs-simple-note-app',
-      Key: 'log-file.log',
-      Body: logData
-    };
+// Morgan log to AWS cloudwatch using winston
+const logger = winston.createLogger({
+  transports: [
+    new WinstonCloudWatch({
+      logGroupName: 'simple-note-app-logs',
+      logStreamName: 'logs-from-server-' + os.hostname(),
+      awsRegion: 'us-east-1',
+      jsonMessage: true,
+    }),
+  ],
+});
 
-    s3.putObject(params, (error) => {
-      if (error) {
-        console.error('Error uploading log to S3:', error);
-      }
-    });
-  }
-};
-app.use(morgan('combined', { stream: s3Stream }));
+morgan('combined', {
+  stream: logger,
+});
 // CORS
 app.use(cors());
 
