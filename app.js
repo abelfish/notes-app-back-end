@@ -1,5 +1,7 @@
 const express = require('express');
-const winston = require('winston'), WinstonCloudWatch = require('winston-cloudwatch');
+const winston = require('winston')
+const { format } = require('winston');
+const WinstonCloudWatch = require('winston-cloudwatch');
 const userRouter = require('./routers/userRouter');
 const morgan = require('morgan');
 const PORT = 80;
