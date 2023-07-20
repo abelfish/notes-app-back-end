@@ -21,9 +21,7 @@ AWS.config.update({
 
 // Mongoose
 // connect to database
-mongoose
-  .connect(DB_SERVER
-  )
+mongoose.connect(DB_SERVER)
   .then(() => {
     console.log('Connected to database');
   })
