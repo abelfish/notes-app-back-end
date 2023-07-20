@@ -31,7 +31,7 @@ mongoose
 
 // Morgan log to AWS cloudwatch using winston
 const logger = log = winston.createLogger({
-  level: 'debug',
+  level: 'info',
   format: format.json(),
   transports: [
     new WinstonCloudWatch({
