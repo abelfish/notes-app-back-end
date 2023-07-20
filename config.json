@@ -1,6 +1,6 @@
 {
   "SERVER_PORT": 80,
   "SERVER_URL": "note-app-alb-607615785.us-east-1.elb.amazonaws.com",
-  "DB_SERVER": "mongodb://root:root1234@notes-db.cluster-ch5kfddkrboe.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=global-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false",
+  "DB_SERVER": "mongodb://root:root1234@notes-db.cluster-ch5kfddkrboe.us-east-1.docdb.amazonaws.com:27017/notes/?ssl=true&ssl_ca_certs=global-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false",
   "SECRET": "234lkjlsakfjdassl"
 }
